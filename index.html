@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Science Group</title>
+        <!-- Bootstrap -->
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+        <!-- Custom Style -->
+        <link href="css/style.css" rel="stylesheet">
+        <!-- Include Date Range Picker -->
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css" />
+        <!-- Multi-Select style -->
+        <link rel="stylesheet" href="css/bootstrap-multiselect.css" type="text/css"/>
+    </head>
+    <body style="background-image: url('img/planet2.jpg')">
+        
+            <div class="row title-container">
+                <h1 class="title-page">Science Group</h1>
+            </div>
+            <div class="row row-label">
+                <h2>Programa Espacial</h2>
+                <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.</p>
+            </div>
+            <div class="row row-container">
+                <div class="col-xs-6 spc_ProgramaEspacialForm">
+                    <h2>Programa Espacial</h2>
+                    <form role="form" name="programaEspacial">
+                        <div class="form-group">
+                            <label for="spc_NombrePrograma">Nombre del programa:</label>
+                            <input type="text" class="form-control" id='spc_NombrePrograma' name="nombrePrograma" ng-model="nombrePrograma" required>
+                            <span class="help-inline" ng-show="submitted && programaEspacial.nombrePrograma.$error.required">Este espacio es requerido.</span>
+                        </div>
+                        <div class="form-group">
+                            <label for="spc_RangoFecha">Fecha de inicio - Fecha de finalización:</label>
+                            <input id="spc_RangoFecha" class="form-control" name="daterange" id="spc_FechaInFin">
+                        </div>
+                        <div class="form-group">
+                            <label for="spc_AlcancePrograma">Alcance:</label>
+                            <textarea class="form-control" id="spc_AlcancePrograma" placeholder="Descripción del alcance" name="alcancePrograma" ng-model="alcancePrograma" required></textarea>
+                            <span class="help-inline" ng-show="submitted && programaEspacial.alcancePrograma.$error.required">Por favor escriba el alcance de programa.</span>
+                        </div>
+                        <div class="form-group">
+                            <label for="spc_MisionesPrograma">Misiones:</label>
+                            <select id="spc_MisionesPrograma" multiple="multiple" name="misionesPrograma" ng-model="misionesPrograma" required>
+                           <option value="1" selected="selected">MISION 1</option>
+                                <option value="2">MISION 2</option>
+                                <option value="3">MISION 3</option>
+                                <option value="4">MISION 4</option>
+                                <option value="5">MISION 5</option>
+                                <option value="6">MISION 6</option>
+                            </select>
+                            <span class="help-inline" ng-show="submitted && programaEspacial.misionesPrograma.$error.required">Por favor escriba el nombre de la misión.</span>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-default spc_ProgramaButton" ng-click="submitted=true" id="btnGPRogramaEsp">Ingresar</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-xs-6">
+                    <button class="btn btn-primary listarProgramas">Listar todos los programas</button>
+                    <table id="tblProgEspacial" class="table table-hover">
+                    <thead>
+                      <tr>
+                        <th>Nombre del programa</th>
+                        <th>Fechas</th>
+                        <th>Alcance</th>
+                        <th>Misiones</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+            </div>
+            <div class="row row-label">
+                <h2>Misión Espacial</h2>
+                <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.</p>
+            </div>
+            <div class="row row-container">
+                <div class="col-xs-6 spc_MisionEspacialForm">
+                    <h2>Misión Espacial</h2>
+                    <form role="form" name="misionEspacial">
+                        <div class="form-group">
+                            <label for="spc_NombreMision">Nombre de la misión:</label>
+                            <input type="text" class="form-control" id="spc_NombreMision" name="nombreMision" ng-model="nombreMision" required>
+                            <span class="help-inline" ng-show="submitted && misionEspacial.nombreMision.$error.required">Por favor escriba el nombre de la misión.</span>
+                        </div>
+                        <div class="row spc_MisionTripulantes">
+                            <div class="form-group ">
+                                <label for="spc_MisionTripulantes">Tripulantes:</label>
+                                <input type="text" class="form-control myText" id="spc_MisionTripulantes" name="misionTripulantes" ng-model="misionTripulantes" required>
+                                <a href="" name="misionTripulantes" class="glyphicon glyphicon-plus spc_AddTripulantes "></a>
+                                <span class="help-inline" ng-show="submitted && misionEspacial.misionTripulantes.$error.required">Por favor elija al menos un tripulante.</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="spc_MisionLanzamiento">Fecha de lanzamiento:</label>
+                            <input class="form-control" id="spc_MisionLanzamiento" name="singleDate">
+                        </div>
+                        <div class="form-group">
+                            <label for="spc_MisionDuracion">Duración en tiempo:</label>
+                            <input class="form-control" id="spc_MisionDuracion">
+                        </div>
+                        <div class="form-group">
+                            <label for="spc_MisionDatos">Datos de interés:</label>
+                            <textarea class="form-control" id="spc_MisionDatos"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="spc_MisionResultado">Resultado:</label>
+                            <input type="text" class="form-control" id="spc_MisionResultado">
+                        </div>
+                        <div class="form-group spc_Insignia">
+                            <label for="spc_MisionInsignia">Insignia:</label>
+                            <input class="form-control" type="file" id="files" name="files[]" multiple />
+                            <output id="list"></output>
+                        </div>
+                        <div class="form-group" style="display: inline-block; width: 100%;">
+                            <label for="spc_MisionNave">Nave:</label>
+                            <select id="spc_MisionNave">
+                                <option value="1" selected="selected">NAVE 1</option>
+                                <option value="2">NAVE 2</option>
+                                <option value="3">NAVE 3</option>
+                                <option value="4">NAVE 4</option>
+                                <option value="5">NAVE 5</option>
+                                <option value="6">NAVE 6</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="spc_MisionCuerpoCeleste">Cuerpo celeste destino:</label>
+                            <input type="text" class="form-control" id="spc_MisionCuerpoCeleste">
+                        </div>
+                        <button type="submit" id="btnSubmitMision" class="btn btn-default" onclick=""ng-click="submitted=true">Ingresar</button>
+                    </form>
+                </div>
+                <div class="col-xs-6">
+                    <button class="btn btn-primary listarMisiones">Listar todas las misiones</button>
+                    <table id="tblMsiones" class="table table-hover">
+                    <thead>
+                      <tr>
+                        <th>Nombre Misión</th>
+                        <th>Tripulantes</th>
+                        <th>Fecha</th>
+                        <th>Duración</th>
+                        <th>Datos</th>
+                        <th>Resultado</th>
+                        <!-- <th>Insignia</th> -->
+                        <th>Nave</th>
+                        <th>Cuerpo Celeste Destino</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <!-- <td></td> -->
+                        <td></td>
+                        <td></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+            </div>
+
+            <div class="row row-label">
+                 <h2>Cuerpos Celestes</h2>
+                    
+                <header class="main-nav">
+                    <ul class="nav nav-pills ">
+                      <li  class=" btn btn-lg"><a href ng-click="cuerpo =1">planetas</a></li>
+                      <li class=" btn btn-lg"><a href ng-click="cuerpo =2">Estrellas</a></li>
+                      <li class=" btn btn-lg"><a href ng-click="cuerpo =3">Satèlite</a></li>
+                    </ul>
+                </header>
+            </div>              
+            
+            <div class="row row-container">
+
+                <form role="form" name="cuerpoCeleste" class="row"  ng-show="cuerpo==1">
+
+                   <div class="planetForm col-md-4">
+                        <div class="form-group" >
+                            <label for="spc_nombreCuerpoCel">Nombre:</label>
+                            <input type="text" class="form-control" id='spc_NombreCuerpoCel' name="nombreCuerpoCel" ng-model="nombreCuerpoCel" required>
+                            <span class="help-inline" ng-show="submitted && cuerpoCeleste.nombreCuerpoCel.$error.required">Este espacio es requerido.</span>
+                        </div>
+                        <div class="form-group">
+                            <label for="spc_MasaCuerpoCel">Masa:</label>
+                            <input type="text" class="form-control" id='spc_MasaCuerpoCel' name="masaCuerpoCel" ng-model="masaCuerpoCel" required>
+                            <span class="help-inline" ng-show="submitted && cuerpoCeleste.masaCuerpoCel.$error.required">Este espacio es requerido.</span>
+                        </div>
+                        <div class="form-group">
+                            <label for="spc_tempCuerpoCel">Temperatura Media:</label>
+                            <input type="text" class="form-control" id='spc_TempCuerpoCel' name="tempCuerpoCel" ng-model="tempCuerpoCel" required>
+                            <span class="help-inline" ng-show="submitted && cuerpoCeleste.tempCuerpoCel.$error.required">Este espacio es requerido.</span>
+                        </div>
+                        <div class="form-group">
+                            <label for="spc_durCuerpoCel">Duración de un Día:</label>
+                            <input type="text" class="form-control" id='spc_DurCuerpoCel' name="durCuerpoCel" ng-model="durCuerpoCel" required>
+                            <span class="help-inline" ng-show="submitted && cuerpoCeleste.durCuerpoCel.$error.required">Este espacio es requerido.</span>
+                        </div> 
+                        <div class="form-group">
+                            <label for="spc_distPlaneta">Distancia media del sol:</label>
+                            <input type="text" class="form-control" id='spc_DistPlaneta' name="distPlaneta" ng-model="disPlaneta" required>
+                            <span class="help-inline" ng-show="submitted && Planeta.distPlanet.$error.required">Este espacio es requerido.</span>
+                        </div>
+                        <div class="form-group">
+                            <label for="spc_duracionPlaneta">Duración de un año:</label>
+                            <input type="text" class="form-control" id='spc_DuracionPlaneta' name="duracionPlaneta" ng-model="duracionPlaneta" required>
+                            <span class="help-inline" ng-show="submitted && Planeta.duracPlanet.$error.required">Este espacio es requerido.</span>
+                        </div>
+                        <div class="form-group">
+                        <label for="spc_cantSatPlanet">Cantidad de Satélites:</label>
+                        <input type="text" class="form-control" id='spc_cantSatPlanet' name="cantSats" ng-model="cantSats" required>
+                        <span class="help-inline" ng-show="submitted && Planeta.cantPlanet.$error.required">Este espacio es requerido.</span>
+                        </div>
+                        <div class="form-group">
+                            <label for="spc_satOrbPlanet">Satélites en su órbita:</label>
+                            <input type="text" class="form-control" id='spc_satOrbPlanet' name="satOrbPlanet" ng-model="satOrbPlanet" required>
+                            <span class="help-inline" ng-show="submitted && Planeta.satPlanet.$error.required">Este espacio es requerido.</span>
+                        </div> 
+                        <button type="submit" id="btnSubmitCuerpoC" class="btn btn-default" ng-click="submitted=true">Ingresar</button>
+  
+                    </div>
+                    <div id="tblPlanetas" class="col-md-8"  ng-show="cuerpo==1">
+                        <button class="btn btn-primary">Mostrar lista de planetas</button>
+                        <table  class="table table-hover">
+                        <thead>
+                          <tr>
+                            <th>Nombre</th>
+                            <th>Masa</th>
+                            <th>Temperatura media</th>
+                            <th>Duración de un día</th>
+                            <th>Distancia</th>
+                            <th>Duración</th>
+                            <th>Cantidad de Satélites</th>
+                            <th>Satelites en Órbita</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                </form>
+
+                <form role="form" name="cuerpoCeleste" class="row" ng-show="cuerpo==2">
+
+                <div class="estrellaForm col-md-4"> 
+                    <div class="form-group">
+                        <label for="spc_nombreCuerpoCel">Nombre:</label>
+                        <input type="text" class="form-control" id='spc_NombreCuerpoCel' name="nombreCuerpoCel" ng-model="nombreCuerpoCel" required>
+                        <span class="help-inline" ng-show="submitted && cuerpoCeleste.nombreCuerpoCel.$error.required">Este espacio es requerido.</span>
+                    </div>
+                    <div class="form-group">
+                        <label for="spc_MasaCuerpoCel">Masa:</label>
+                        <input type="text" class="form-control" id='spc_MasaCuerpoCel' name="masaCuerpoCel" ng-model="masaCuerpoCel" required>
+                        <span class="help-inline" ng-show="submitted && cuerpoCeleste.masaCuerpoCel.$error.required">Este espacio es requerido.</span>
+                    </div>
+                    <div class="form-group">
+                        <label for="spc_tempCuerpoCel">Temperatura Media:</label>
+                        <input type="text" class="form-control" id='spc_TempCuerpoCel' name="tempCuerpoCel" ng-model="tempCuerpoCel" required>
+                        <span class="help-inline" ng-show="submitted && cuerpoCeleste.tempCuerpoCel.$error.required">Este espacio es requerido.</span>
+                    </div>
+                    <div class="form-group">
+                        <label for="spc_durCuerpoCel">Duración de un Día:</label>
+                        <input type="text" class="form-control" id='spc_DurCuerpoCel' name="durCuerpoCel" ng-model="durCuerpoCel" required>
+                        <span class="help-inline" ng-show="submitted && cuerpoCeleste.durCuerpoCel.$error.required">Este espacio es requerido.</span>
+                    </div>
+                    <div class="form-group">
+                        <label for="spc_edadEstrella">Edad:</label>
+                        <input type="text" class="form-control" id='spc_edadEstrella' name="edadEstrella" ng-model="edadEstrella" required>
+                        <span class="help-inline" ng-show="submitted && Estrella.edadEst.$error.required">Este espacio es requerido.</span>
+                    </div>
+                    <div class="form-group">
+                        <label for="spc_compEstrella">Composición:</label>
+                        <input type="text" class="form-control" id='spc_compEstrella' name="compEstrella" ng-model="compEstrella" required>
+                        <span class="help-inline" ng-show="submitted && Estrella.compEstrella.$error.required">Este espacio es requerido.</span>
+                    </div>
+                    <div class="form-group">
+                        <label for="spc_IntEstrella">Intensidad Lúmica:</label>
+                        <input type="text" class="form-control" id='spc_IntEstrella' name="intensidadEst" ng-model="intensidadEst" required>
+                        <span class="help-inline" ng-show="submitted && Estrella.IntensidadEst.$error.required">Este espacio es requerido.</span>
+                    </div>
+                    <div class="form-group">
+                        <label for="spc_tamEstrella">Tamaño:</label>
+                        <input type="text" class="form-control" id='spc_tamEstrella' name="tamanoEstrella" ng-model="tamEstrella" required>
+                        <span class="help-inline" ng-show="submitted && Estrella.IntensidadEst.$error.required">Este espacio es requerido.</span>
+                    </div>
+                </div>
+
+                <div id="tblEstrellas" class="col-md-8"  ng-show="cuerpo==2">
+                    <button class="btn btn-primary"> Mostrar lista de estrellas</button>
+                    <table class="table table-hover">
+                    <thead>
+                      <tr>
+                        <th>Nombre</th>
+                        <th>Masa</th>
+                        <th>Temperatura media</th>
+                        <th>Duración de un día</th>
+                        <th>Edad</th>
+                        <th>Composición</th>
+                        <th>Intensidad</th>
+                        <th>Tamaño</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                    
+
+                </form>
+
+                <form role="form" name="cuerpoCeleste" class="row" ng-show="cuerpo==3">
+                    <div class="sateliteForm col-md-4"> 
+                        <div class="form-group">
+                            <label for="spc_nombreCuerpoCel">Nombre:</label>
+                            <input type="text" class="form-control" id='spc_NombreCuerpoCel' name="nombreCuerpoCel" ng-model="nombreCuerpoCel" required>
+                            <span class="help-inline" ng-show="submitted && cuerpoCeleste.nombreCuerpoCel.$error.required">Este espacio es requerido.</span>
+                        </div>
+                        <div class="form-group">
+                            <label for="spc_MasaCuerpoCel">Masa:</label>
+                            <input type="text" class="form-control" id='spc_MasaCuerpoCel' name="masaCuerpoCel" ng-model="masaCuerpoCel" required>
+                            <span class="help-inline" ng-show="submitted && cuerpoCeleste.masaCuerpoCel.$error.required">Este espacio es requerido.</span>
+                        </div>
+                        <div class="form-group">
+                            <label for="spc_tempCuerpoCel">Temperatura Media:</label>
+                            <input type="text" class="form-control" id='spc_TempCuerpoCel' name="tempCuerpoCel" ng-model="tempCuerpoCel" required>
+                            <span class="help-inline" ng-show="submitted && cuerpoCeleste.tempCuerpoCel.$error.required">Este espacio es requerido.</span>
+                        </div>
+                        <div class="form-group">
+                            <label for="spc_durCuerpoCel">Duración de un Día:</label>
+                            <input type="text" class="form-control" id='spc_DurCuerpoCel' name="durCuerpoCel" ng-model="durCuerpoCel" required>
+                            <span class="help-inline" ng-show="submitted && cuerpoCeleste.durCuerpoCel.$error.required">Este espacio es requerido.</span>
+                        </div>
+                        <div class="form-group">
+                            <label for="spc_DistanciaSatelite">Distancia media existente el satélite y el cuerpo sobre el cual orbita :</label>
+                            <input type="text" class="form-control" id='spc_DistanciaSatelite' name="tempCuerpoCel" ng-model="tempCuerpoCel" required>
+                            <span class="help-inline" ng-show="submitted && Satelite.distMediaSat.$error.required">Este espacio es requerido.</span>
+                        </div>
+                        <div class="form-group">
+                            <label for="spc_CaractPrincSat">Características Principales:</label>
+                            <textarea class="form-control" id="spc_CaractPrincSat" placeholder="Descripción Características" name="caractPrinc" ng-model="caractPrincSat" required></textarea>
+                            <span class="help-inline" ng-show="submitted && Satelite.caractPrincSat.$error.required">Por favor escriba el caracteristicas principales</span>
+                        </div>
+                        <div class="form-group">
+                            <label for="spc_pertenenciaSatelite">Planeta al que pertenece:</label>
+                            <input type="text" class="form-control" id='spc_pertenenciaSatelite' name="pertSatelite" ng-model="pertSatelite" required>
+                            <span class="help-inline" ng-show="submitted && Satelite.pertSat.$error.required">Este espacio es requerido.</span>
+                        </div>
+                    </div>
+
+                     <div id="tblSatelites" class="col-md-8"  ng-show="cuerpo==3">
+                        <button class="btn btn-primary">Mostrar lista de  satélites</button>
+                        <table id="tblSatelites" class="table table-hover">
+                        <thead>
+                          <tr>
+                            <th>Distancia</th>
+                            <th>Caracteristicas</th>
+                            <th>Pertenencia</th>
+                            <th>Nombre</th>
+                            <th>Masa</th>
+                            <th>Temperatura media</th>
+                            <th>Duración de un día</th> 
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                </form> 
+            </div>
+
+        <!-- jquery -->
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/1/jquery.min.js"></script>
+        <script type="text/javascript" src="js/programaEspacial.js"></script>
+        <!-- Bootstrap -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+        <!-- momentjs -->
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+        <!-- Angular -->
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
+        <!-- Date Range Picker -->
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.js"></script>
+        <!-- Multi-Select -->
+        <script type="text/javascript" src="js/bootstrap-multiselect.js"></script>
+        <!-- Custom Script -->
+        <script type="text/javascript" src="js/logic.js"></script>
+        <script src="js/misiones.js"></script>
+    </body>
+</html>
